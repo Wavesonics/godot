@@ -1574,6 +1574,10 @@ PoolVector<uint8_t> Image::get_data() const {
 	return data;
 }
 
+PoolVector<uint8_t> &Image::get_data_internal() {
+	return data;
+}
+
 void Image::create(int p_width, int p_height, bool p_use_mipmaps, Format p_format) {
 
 	ERR_FAIL_INDEX(p_width - 1, MAX_WIDTH);

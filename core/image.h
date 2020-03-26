@@ -256,6 +256,7 @@ public:
 	bool empty() const;
 
 	PoolVector<uint8_t> get_data() const;
+	PoolVector<uint8_t> &get_data_internal();
 
 	Error load(const String &p_path);
 	Error save_png(const String &p_path) const;
