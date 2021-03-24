@@ -832,7 +832,7 @@ Error ResourceLoaderText::rename_dependencies(FileAccess *p_f, const String &p_p
 				path = base_path.path_to_file(path);
 			}
 
-			fw->store_line("[ext_resource path=\"" + path + "\" type=\"" + type + "\" id=" + itos(index) + "]");
+			fw->store_line("[ext_resource path=\"" + path + "\" type=\"" + type + "\" id=" + itos(path.hash()) + "]");
 
 			tag_end = f->get_position();
 		}
@@ -1393,7 +1393,8 @@ String ResourceFormatSaverTextInstance::_write_resources(void *ud, const RES &p_
 
 String ResourceFormatSaverTextInstance::_write_resource(const RES &res) {
 	if (external_resources.has(res)) {
-		return "ExtResource( " + itos(external_resources[res]) + " )";
+		
+		return "ExtResource( " + itos(res->get_path().hash()) + " )";
 	} else {
 		if (internal_resources.has(res)) {
 			return "SubResource( " + itos(internal_resources[res]) + " )";
@@ -1602,7 +1603,7 @@ Error ResourceFormatSaverTextInstance::save(const String &p_path, const RES &p_r
 	for (int i = 0; i < sorted_er.size(); i++) {
 		String p = sorted_er[i].resource->get_path();
 
-		f->store_string("[ext_resource path=\"" + p + "\" type=\"" + sorted_er[i].resource->get_save_class() + "\" id=" + itos(sorted_er[i].index) + "]\n"); //bundled
+		f->store_string("[ext_resource path=\"" + p + "\" type=\"" + sorted_er[i].resource->get_save_class() + "\" id=" + itos(p.hash()) + "]\n"); //bundled
 	}
 
 	if (external_resources.size()) {

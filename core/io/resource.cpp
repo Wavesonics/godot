@@ -358,7 +358,7 @@ void Resource::set_id_for_path(const String &p_path, int p_id) {
 int Resource::get_id_for_path(const String &p_path) const {
 	ResourceCache::path_cache_lock.read_lock();
 	if (ResourceCache::resource_path_cache[p_path].has(get_path())) {
-		int result = ResourceCache::resource_path_cache[p_path][get_path()];
+		int result = p_path.hash();
 		ResourceCache::path_cache_lock.read_unlock();
 		return result;
 	} else {

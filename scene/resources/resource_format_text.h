@@ -175,7 +175,7 @@ class ResourceFormatSaverTextInstance {
 		RES resource;
 		int index = 0;
 		bool operator<(const ResourceSort &p_right) const {
-			return index < p_right.index;
+			return resource->get_path().hash() < p_right.resource->get_path().hash();
 		}
 	};
 

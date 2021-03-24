@@ -86,6 +86,7 @@ Error ResourceSaver::save(const String &p_path, const RES &p_resource, uint32_t 
 	Error err = ERR_FILE_UNRECOGNIZED;
 
 	for (int i = 0; i < saver_count; i++) {
+		// Find the index of the saver for this resource
 		if (!saver[i]->recognize(p_resource)) {
 			continue;
 		}
@@ -103,6 +104,8 @@ Error ResourceSaver::save(const String &p_path, const RES &p_resource, uint32_t 
 		if (!recognized) {
 			continue;
 		}
+
+		// From here on this saver recognizes this resource
 
 		String old_path = p_resource->get_path();
 
